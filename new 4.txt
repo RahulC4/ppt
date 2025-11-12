@@ -1,0 +1,206 @@
+ $env:LOG_LEVEL="DEBUG" 
+(.venv) PS C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)> python -c "from generate_ppt import generate_presentation;
+>> generate_presentation('create a 5 slide corporate presentation on insurance architecture and migration.')"
+2025-11-12 12:58:51,931 | INFO | chromadb.telemetry.product.posthog | Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-11-12 12:58:52,731 | DEBUG | chromadb.config | Starting component System
+2025-11-12 12:58:52,732 | DEBUG | chromadb.config | Starting component Posthog
+2025-11-12 12:58:53,291 | DEBUG | urllib3.connectionpool | Starting new HTTPS connection (1): us.i.posthog.com:443
+2025-11-12 12:58:55,212 | DEBUG | urllib3.connectionpool | https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+2025-11-12 12:58:58,029 | DEBUG | openai._base_client | Request options: {'method': 'post', 'url': '/deployments/text-embedding-3-large/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-1b8c0a67-d4da-4808-b0a1-77df7fed2075', 'post_parser': <function Embeddings.create.<locals>.parser at 0x000001278F70E160>, 'json_data': {'input': 'create a 5 slide corporate presentation on insurance architecture and migration.', 'model': 'text-embedding-3-large', 'encoding_format': 'base64'}}
+2025-11-12 12:58:58,058 | DEBUG | openai._base_client | Sending HTTP Request: POST https://ppt-ai-gen-sm173.openai.azure.com/openai/deployments/text-embedding-3-large/embeddings?api-version=2024-05-01-preview
+2025-11-12 12:58:58,058 | DEBUG | httpcore.connection | connect_tcp.started host='ppt-ai-gen-sm173.openai.azure.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-11-12 12:58:58,586 | DEBUG | httpcore.connection | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001279AE21940>
+2025-11-12 12:58:58,587 | DEBUG | httpcore.connection | start_tls.started ssl_context=<ssl.SSLContext object at 0x0000012793715950> server_hostname='ppt-ai-gen-sm173.openai.azure.com' timeout=5.0
+2025-11-12 12:58:59,177 | DEBUG | httpcore.connection | start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001279AEB8410>
+2025-11-12 12:58:59,177 | DEBUG | httpcore.http11 | send_request_headers.started request=<Request [b'POST']>
+2025-11-12 12:58:59,178 | DEBUG | httpcore.http11 | send_request_headers.complete
+2025-11-12 12:58:59,178 | DEBUG | httpcore.http11 | send_request_body.started request=<Request [b'POST']>
+2025-11-12 12:58:59,178 | DEBUG | httpcore.http11 | send_request_body.complete
+2025-11-12 12:58:59,178 | DEBUG | httpcore.http11 | receive_response_headers.started request=<Request [b'POST']>
+2025-11-12 12:58:59,551 | DEBUG | httpcore.http11 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'16608'), (b'Content-Type', b'application/json'), (b'access-control-allow-origin', b'*'), (b'apim-request-id', b'd9d45d91-ee15-44fb-ab1f-7c5c3a6191b8'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'East US'), (b'x-ratelimit-remaining-tokens', b'249980'), (b'x-ratelimit-limit-tokens', b'250000'), (b'x-request-id', b'5d4676c1-8e81-4a62-8d8e-68e48995ffcb'), (b'azureml-model-session', b'd097-20250902104841'), (b'x-envoy-upstream-service-time', b'62'), (b'x-ms-client-request-id', b'd9d45d91-ee15-44fb-ab1f-7c5c3a6191b8'), (b'x-ms-deployment-name', b'text-embedding-3-large'), (b'Date', b'Wed, 12 Nov 2025 07:28:58 GMT')])
+2025-11-12 12:58:59,552 | INFO | httpx | HTTP Request: POST https://ppt-ai-gen-sm173.openai.azure.com/openai/deployments/text-embedding-3-large/embeddings?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-11-12 12:58:59,552 | DEBUG | httpcore.http11 | receive_response_body.started request=<Request [b'POST']>
+2025-11-12 12:58:59,553 | DEBUG | httpcore.http11 | receive_response_body.complete
+2025-11-12 12:58:59,553 | DEBUG | httpcore.http11 | response_closed.started
+2025-11-12 12:58:59,553 | DEBUG | httpcore.http11 | response_closed.complete
+2025-11-12 12:58:59,553 | DEBUG | openai._base_client | HTTP Response: POST https://ppt-ai-gen-sm173.openai.azure.com/openai/deployments/text-embedding-3-large/embeddings?api-version=2024-05-01-preview "200 OK" Headers({'content-length': '16608', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'apim-request-id': 'd9d45d91-ee15-44fb-ab1f-7c5c3a6191b8', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'East US', 'x-ratelimit-remaining-tokens': '249980', 'x-ratelimit-limit-tokens': '250000', 'x-request-id': '5d4676c1-8e81-4a62-8d8e-68e48995ffcb', 'azureml-model-session': 'd097-20250902104841', 'x-envoy-upstream-service-time': '62', 'x-ms-client-request-id': 'd9d45d91-ee15-44fb-ab1f-7c5c3a6191b8', 'x-ms-deployment-name': 'text-embedding-3-large', 'date': 'Wed, 12 Nov 2025 07:28:58 GMT'})
+2025-11-12 12:58:59,554 | DEBUG | openai._base_client | request_id: 5d4676c1-8e81-4a62-8d8e-68e48995ffcb
+2025-11-12 12:58:59,676 | INFO | ai-ppt-generator-chroma | Loaded 10 design JSONs and 10 text snippets for context.
+2025-11-12 12:58:59,681 | DEBUG | openai._base_client | Request options: {'method': 'post', 'url': '/deployments/gpt-4o-sm173/chat/completions', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-2c842022-8b94-4510-b606-3cb2ac508f7e', 'json_data': {'messages': [{'role': 'system', 'content': 'You are an expert presentation designer. Your job is to create a presentation plan based on content and design references.\nOutput must be JSON only: list of slides, each with keys:\n{"title": str, "bullets": [str], "visual_required": bool, "visual_prompt": str (optional)}.\n\nUse reference texts for content and design JSONs for style. If retrieved references align in both design and content, add visuals. If not, decide on visuals independently.\nRespect any user-specified slide count or theme; if not provided, make your own best choice.\nTheme preference: Corporate.\n\nDesign Context (truncated): [{"ppt_name": "CareSource Facets Reimplementation 11_13_2017 FINAL_Updated.pptx", "extracted_on": "2025-11-11T11:39:10.140345Z", "theme_colors": [], "font_families": ["Calibri", "+mj-lt", "Arial"], "slide_layouts": ["Blank with Header", "1_Keep Challenging w/ animation", "2_Cover Slide - White"], "slides": [{"layout": "2_Cover Slide - White", "background_color": null, "images": [], "shapes": [], "charts": [], "tables": [], "icons": [], "text_fonts": [], "accent_colors": [], "index": 0, "slide_number": 1}, {"layout": "Blank with Header", "background_color": null, "images": [], "shapes": ["RECTANGLE (1)"], "charts": [], "tables": [], "icons": [], "text_fonts": [], "accent_colors": [], "index": 1, "slide_number": 2}, {"layout": "Blank with Header", "background_color": null, "images": [], "shapes": ["RECTANGLE (1)", "RECTANGLE (1)"], "charts": [], "tables": [], "icons": [], "text_fonts": [], "accent_colors": [], "index": 2, "slide_number": 3}, {"layout": "Blank with Header", "background_color": null, "images": ["Picture 62"], "shapes": ["ROUNDED_RECTANGLE (5)", "LEFT_RIGHT_ARROW (37)", "LEFT_RIGHT_ARROW (37)", "PENTAGON (51)", "PENTAGON (51)", "PENTAGON (51)", "CHEVRON (52)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "PENTAGON (51)", "CHEVRON (52)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "LEFT_RIGHT_ARROW (37)"], "charts": [], "tables": [], "icons": [], "text_fonts": [], "accent_colors": [], "index": 3, "slide_number": 4}, {"layout": "Blank with Header", "background_color": null, "images": [], "shapes": ["OVAL (9)", "OVAL (9)", "OVAL (9)", "OVAL (9)", "OVAL (9)", "OVAL (9)", "PENTAGON (51)", "PENTAGON (51)", "PENTAGON (51)", "PENTAGON (51)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "PENTAGON (51)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "OVAL (9)", "OVAL (9)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)", "DIAMOND (4)"], "charts": [], "tables": ["Table 2"], "icons": [], "text_fonts": [], "accent_colors": [], "index": 4, "slide_number": 5}, {"layout": "Blank with Header", "background_color": null, "images": [], "shapes": ["RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "STAR_5_POINT (92)", "STAR_5_POINT (92)", "STAR_5_POINT (92)"], "charts": [], "tables": ["Table 3"], "icons": [], "text_fonts": ["+mj-lt"], "accent_colors": ["#4CB3CF", "#6BB445"], "index": 5, "slide_number": 6}, {"layout": "Blank with Header", "background_color": null, "images": ["Picture 33", "Picture 34", "Picture 3", "Picture 3", "Picture 3"], "shapes": ["RECTANGLE (1)", "TRAPEZOID (3)", "RECTANGLE (1)", "ROUND_2_SAME_RECTANGLE (152)", "ROUND_2_SAME_RECTANGLE (152)", "ROUND_2_SAME_RECTANGLE (152)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "RECTANGLE (1)", "ROUNDED_RECTANGLE (5)", "ROUNDED_RECTANGLE (5)"], "charts": [], "tables": [], "icons": [], "text_fonts": [], "accent_colors": ["#00B0F0"], "index": 6, "slide_number": 7}, {"layout": "Blank with Header", "background_color": null, "images": ["Picture 59"], "shapes": ["RECTANGLE (1)", "PENTAGON (51)", "PENTAGON (51)", "RECTANGLE (1)"], "charts": [], "tables": [], "icons": [], "text_fonts": ["+mj-lt"], "accent_colors": [], "index": 7, "slide_number": 8}, {"layout": "Blank with Header", "background_color": null, "images": [], "shapes": ["PENTAGON (51)", "DIAMOND (4)", "DIAMOND (4)", "PENTAGON \n\nReference snippets: ["Approach 2 - Consulting Partner Suite\\nGold copy establishment guidance\\nBRC design guidance\\nOversight to Config Build teams\\nOversight to Custom Dev\\nOversight to System Testing\\nOversight to SIT, Data migration\\nPost go-live  oversight\\nSSDs creation, HLDs / Test Plans oversight\\nInterface framework guidance\\nOversight to Data migration\\nOversight to Provider, Member and Claims go-live\\nData migration spec", "Approach 1 \\u2013 Development Partner Suite\\nGold copy establishment, Product config design\\nBRC design\\nRefer Plan & Define milestone slide for detail break-up of tasks\\nProduct Config Build\\nTech Specs, SI / Custom Dev\\nSystem Testing\\nSIT, Data migration testing\\nWarranty Support\\nSSDs, HLDs, Test Plans creation\\nInterface framework design\\nData migration from legacy Facets to new Facets\\nProvider, Member and C", "Global Design Overview\\nCareFirst\\nSeptember 2021\\n\\u00a9 2021 Cognizant", "Global Design - Systems Transformation\\nGlobal Design\\nBuild\\nTest / Deploy\\nSteady State\\nPre-Planning\\nTIMELINE\\nPre-Planning: Initiate project planning with core group of IT and Business leads to align on approach, scope, strategy, and ROM estimate for the project\\nGlobal Design: Collaboration between business and IT to define foundational requirements, complete initial planning and estimation for a pr", "Global Phase Overview\\n\\u00a9 2021 Cognizant\\nAPPLICATION / PROCESS ARCHITECTURE\\nTo-Be state Solution Architecture\\ncloud refactoring\\nAI/ ML / RPA (Robotics)\\nCONFIGURATION\\nFoundational configuration design\\nSYSTEM INTEGRATION\\nApplication rationalization\\nVendor Rationalization\\nInventory consolidation\\nData modernization\\nDATA MIGRATION\\nCut-over Strategy\\nMigration needs\\nENTERPRISE ARCHITECTURE\\nDigital Business", "Agenda\\nGlobal Design Overview\\nGlobal Design System Transformation\\nGlobal Design Roadmap\\nGlobal Design Capabilities & Sub-Capabilities\\nGlobal Design Methodology/Iterative Design\\n\\u00a9 2021 Cognizant\\n2", "Aligning Solution to CareSource Visi\n'}, {'role': 'user', 'content': 'Create a PowerPoint plan for: create a 5 slide corporate presentation on insurance architecture and migration.. Style/phase: Auto. Produce exactly 5 slides.'}], 'model': 'gpt-4o-sm173', 'max_tokens': 1500}}
+2025-11-12 12:58:59,682 | DEBUG | openai._base_client | Sending HTTP Request: POST https://ppt-ai-gen-sm173.openai.azure.com/openai/deployments/gpt-4o-sm173/chat/completions?api-version=2024-05-01-preview
+2025-11-12 12:58:59,683 | DEBUG | httpcore.connection | connect_tcp.started host='ppt-ai-gen-sm173.openai.azure.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-11-12 12:58:59,987 | DEBUG | httpcore.connection | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001279A9B56D0>
+2025-11-12 12:58:59,988 | DEBUG | httpcore.connection | start_tls.started ssl_context=<ssl.SSLContext object at 0x000001278F70ED50> server_hostname='ppt-ai-gen-sm173.openai.azure.com' timeout=5.0
+2025-11-12 12:59:00,162 | DEBUG | urllib3.connectionpool | https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+2025-11-12 12:59:00,584 | DEBUG | httpcore.connection | start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001279AB4E060>
+2025-11-12 12:59:00,584 | DEBUG | httpcore.http11 | send_request_headers.started request=<Request [b'POST']>
+2025-11-12 12:59:00,585 | DEBUG | httpcore.http11 | send_request_headers.complete
+2025-11-12 12:59:00,585 | DEBUG | httpcore.http11 | send_request_body.started request=<Request [b'POST']>
+2025-11-12 12:59:00,585 | DEBUG | httpcore.http11 | send_request_body.complete
+2025-11-12 12:59:00,585 | DEBUG | httpcore.http11 | receive_response_headers.started request=<Request [b'POST']>
+2025-11-12 12:59:00,891 | DEBUG | httpcore.http11 | receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'DeploymentNotFound', [(b'Content-Length', b'197'), (b'Content-Type', b'application/json'), (b'apim-request-id', b'13650c0c-b30c-4988-aeaa-9baaae82a41f'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'East US'), (b'Date', b'Wed, 12 Nov 2025 07:29:00 GMT')])
+2025-11-12 12:59:00,891 | INFO | httpx | HTTP Request: POST https://ppt-ai-gen-sm173.openai.azure.com/openai/deployments/gpt-4o-sm173/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 404 DeploymentNotFound"
+2025-11-12 12:59:00,892 | DEBUG | httpcore.http11 | receive_response_body.started request=<Request [b'POST']>
+2025-11-12 12:59:00,892 | DEBUG | httpcore.http11 | receive_response_body.complete
+2025-11-12 12:59:00,892 | DEBUG | httpcore.http11 | response_closed.started
+2025-11-12 12:59:00,892 | DEBUG | httpcore.http11 | response_closed.complete
+2025-11-12 12:59:00,892 | DEBUG | openai._base_client | HTTP Response: POST https://ppt-ai-gen-sm173.openai.azure.com/openai/deployments/gpt-4o-sm173/chat/completions?api-version=2024-05-01-preview "404 DeploymentNotFound" Headers({'content-length': '197', 'content-type': 'application/json', 'apim-request-id': '13650c0c-b30c-4988-aeaa-9baaae82a41f', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'x-ms-region': 'East US', 'date': 'Wed, 12 Nov 2025 07:29:00 GMT'})
+2025-11-12 12:59:00,893 | DEBUG | openai._base_client | request_id: None
+2025-11-12 12:59:00,893 | DEBUG | openai._base_client | Encountered httpx.HTTPStatusError
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 1027, in request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 DeploymentNotFound' for url 'https://ppt-ai-gen-sm173.openai.azure.com/openai/deployments/gpt-4o-sm173/chat/completions?api-version=2024-05-01-preview'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-11-12 12:59:00,945 | DEBUG | openai._base_client | Not retrying
+2025-11-12 12:59:00,945 | DEBUG | openai._base_client | Re-raising status error
+2025-11-12 12:59:00,946 | ERROR | ai-ppt-generator-chroma | Plan generation failed: Error code: 404 - {'error': {'code': 'DeploymentNotFound', 'message': 'The API deployment for this resource does not exist. If you created the deployment within the last 5 minutes, please wait a moment and try again.'}}
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\generate_ppt.py", line 84, in call_llm_plan
+    resp = client.chat.completions.create(
+        model=CHAT_MODEL,
+        messages=[{"role":"system","content":sys_prompt},{"role":"user","content":user_prompt}],
+        max_tokens=1500
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1156, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<46 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.NotFoundError: Error code: 404 - {'error': {'code': 'DeploymentNotFound', 'message': 'The API deployment for this resource does not exist. If you created the deployment within the last 5 minutes, please wait a moment and try again.'}}
+2025-11-12 12:59:01,088 | INFO | azure.core.pipeline.policies.http_logging_policy | Request URL: 'https://2238880sa.blob.core.windows.net/generated-presentations?restype=REDACTED'
+Request method: 'PUT'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.1 Python/3.13.9 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '424006ce-bf99-11f0-ab79-7ced8d9f6437'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-11-12 12:59:01,091 | DEBUG | urllib3.connectionpool | Starting new HTTPS connection (1): 2238880sa.blob.core.windows.net:443
+2025-11-12 12:59:02,601 | DEBUG | urllib3.connectionpool | https://2238880sa.blob.core.windows.net:443 "PUT /generated-presentations?restype=container HTTP/1.1" 409 230
+2025-11-12 12:59:02,633 | INFO | azure.core.pipeline.policies.http_logging_policy | Response status: 409
+Response headers:
+    'Content-Length': '230'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '2e43844f-b01e-0044-72a6-53dfc2000000'
+    'x-ms-client-request-id': '424006ce-bf99-11f0-ab79-7ced8d9f6437'
+    'x-ms-version': 'REDACTED'
+    'x-ms-error-code': 'ContainerAlreadyExists'
+    'Date': 'Wed, 12 Nov 2025 07:29:01 GMT'
+2025-11-12 12:59:02,652 | INFO | azure.core.pipeline.policies.http_logging_policy | Request URL: 'https://2238880sa.blob.core.windows.net/generated-presentations/generated_9ccdb0be.pptx'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '28263'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.1 Python/3.13.9 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '432ebc93-bf99-11f0-a348-7ced8d9f6437'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-11-12 12:59:03,038 | DEBUG | urllib3.connectionpool | https://2238880sa.blob.core.windows.net:443 "PUT /generated-presentations/generated_9ccdb0be.pptx HTTP/1.1" 201 0
+2025-11-12 12:59:03,039 | INFO | azure.core.pipeline.policies.http_logging_policy | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Wed, 12 Nov 2025 07:29:03 GMT'
+    'ETag': '"0x8DE21BD279DEE1E"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '2e4384e8-b01e-0044-74a6-53dfc2000000'
+    'x-ms-client-request-id': '432ebc93-bf99-11f0-a348-7ced8d9f6437'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Wed, 12 Nov 2025 07:29:02 GMT'
+2025-11-12 12:59:03,040 | INFO | ai-ppt-generator-chroma | Uploaded generated PPT to Azure Blob: generated-presentations/generated_9ccdb0be.pptx
+2025-11-12 12:59:03,041 | INFO | azure.core.pipeline.policies.http_logging_policy | Request URL: 'https://2238880sa.blob.core.windows.net/generated-presentations?restype=REDACTED'
+Request method: 'PUT'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.1 Python/3.13.9 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '436a1353-bf99-11f0-8851-7ced8d9f6437'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-11-12 12:59:03,043 | DEBUG | urllib3.connectionpool | Starting new HTTPS connection (1): 2238880sa.blob.core.windows.net:443
+2025-11-12 12:59:04,438 | DEBUG | urllib3.connectionpool | https://2238880sa.blob.core.windows.net:443 "PUT /generated-presentations?restype=container HTTP/1.1" 409 230
+2025-11-12 12:59:04,438 | INFO | azure.core.pipeline.policies.http_logging_policy | Response status: 409
+Response headers:
+    'Content-Length': '230'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '14a09e80-601e-008c-6ca6-533df3000000'
+    'x-ms-client-request-id': '436a1353-bf99-11f0-8851-7ced8d9f6437'
+    'x-ms-version': 'REDACTED'
+    'x-ms-error-code': 'ContainerAlreadyExists'
+    'Date': 'Wed, 12 Nov 2025 07:29:03 GMT'
+2025-11-12 12:59:04,440 | INFO | azure.core.pipeline.policies.http_logging_policy | Request URL: 'https://2238880sa.blob.core.windows.net/generated-presentations/logs/generated_9ccdb0be.pptx.json'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '336'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.1 Python/3.13.9 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '443f906f-bf99-11f0-87fe-7ced8d9f6437'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-11-12 12:59:04,637 | DEBUG | urllib3.connectionpool | https://2238880sa.blob.core.windows.net:443 "PUT /generated-presentations/logs/generated_9ccdb0be.pptx.json HTTP/1.1" 201 0
+2025-11-12 12:59:04,638 | INFO | azure.core.pipeline.policies.http_logging_policy | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Wed, 12 Nov 2025 07:29:04 GMT'
+    'ETag': '"0x8DE21BD2891EC9D"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '14a09ea2-601e-008c-0aa6-533df3000000'
+    'x-ms-client-request-id': '443f906f-bf99-11f0-87fe-7ced8d9f6437'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Wed, 12 Nov 2025 07:29:03 GMT'
+2025-11-12 12:59:04,638 | INFO | ai-ppt-generator-chroma | Uploaded log to Azure Blob: generated-presentations/logs/generated_9ccdb0be.pptx.json
+2025-11-12 12:59:05,051 | DEBUG | httpcore.connection | close.started
+2025-11-12 12:59:05,051 | DEBUG | httpcore.connection | close.complete
+2025-11-12 12:59:05,052 | DEBUG | httpcore.connection | close.started
+2025-11-12 12:59:05,052 | DEBUG | httpcore.connection | close.complete
+(.venv) PS C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
