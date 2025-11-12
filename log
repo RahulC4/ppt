@@ -1,0 +1,702 @@
+ PS C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)> $env:LOG_LEVEL="DEBUG" 
+(.venv) PS C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)> python -c "from generate_ppt import generate_presentation;
+>> generate_presentation('create a 5 slide corporate presentation on insurance architecture and migration.')"
+2025-11-12 13:55:40,966 | INFO | chromadb.telemetry.product.posthog | Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-11-12 13:55:41,685 | DEBUG | chromadb.config | Starting component System
+2025-11-12 13:55:41,685 | DEBUG | chromadb.config | Starting component Posthog
+2025-11-12 13:55:42,239 | DEBUG | urllib3.connectionpool | Starting new HTTPS connection (1): us.i.posthog.com:443
+2025-11-12 13:55:44,312 | DEBUG | urllib3.connectionpool | https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+2025-11-12 13:55:48,136 | DEBUG | openai._base_client | Request options: {'method': 'post', 'url': '/deployments/text-embedding-3-large/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-c0acc9bb-8783-4c37-8d62-db83e24ac3d5', 'post_parser': <function Embeddings.create.<locals>.parser at 0x00000217FF81E160>, 'json_data': {'input': 'create a 5 slide corporate presentation on insurance architecture and migration.', 'model': 'text-embedding-3-large', 'encoding_format': 'base64'}}
+2025-11-12 13:55:48,178 | DEBUG | openai._base_client | Sending HTTP Request: POST https://ppt-ai-gen-sm173.services.ai.azure.com/api/projects/ppt-ai-gen-sm173-project/openai/deployments/text-embedding-3-large/embeddings?api-version=2024-05-01-preview
+2025-11-12 13:55:48,178 | DEBUG | httpcore.connection | connect_tcp.started host='ppt-ai-gen-sm173.services.ai.azure.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-11-12 13:55:48,701 | DEBUG | httpcore.connection | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002178D421940>
+2025-11-12 13:55:48,702 | DEBUG | httpcore.connection | start_tls.started ssl_context=<ssl.SSLContext object at 0x0000021784D159F0> server_hostname='ppt-ai-gen-sm173.services.ai.azure.com' timeout=5.0
+2025-11-12 13:55:48,926 | DEBUG | httpcore.connection | start_tls.failed exception=ConnectError(ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-11-12 13:55:48,927 | DEBUG | openai._base_client | Encountered Exception
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 982, in request
+    response = self._client.send(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2025-11-12 13:55:49,164 | DEBUG | openai._base_client | 2 retries left
+2025-11-12 13:55:49,164 | INFO | openai._base_client | Retrying request to /embeddings in 0.494919 seconds
+2025-11-12 13:55:49,660 | DEBUG | openai._base_client | Request options: {'method': 'post', 'url': '/deployments/text-embedding-3-large/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-c0acc9bb-8783-4c37-8d62-db83e24ac3d5', 'post_parser': <function Embeddings.create.<locals>.parser at 0x00000217FF81E160>, 'json_data': {'input': 'create a 5 slide corporate presentation on insurance architecture and migration.', 'model': 'text-embedding-3-large', 'encoding_format': 'base64'}}
+2025-11-12 13:55:49,661 | DEBUG | openai._base_client | Sending HTTP Request: POST https://ppt-ai-gen-sm173.services.ai.azure.com/api/projects/ppt-ai-gen-sm173-project/openai/deployments/text-embedding-3-large/embeddings?api-version=2024-05-01-preview
+2025-11-12 13:55:49,661 | DEBUG | httpcore.connection | connect_tcp.started host='ppt-ai-gen-sm173.services.ai.azure.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-11-12 13:55:49,956 | DEBUG | httpcore.connection | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002178D4BD450>
+2025-11-12 13:55:49,956 | DEBUG | httpcore.connection | start_tls.started ssl_context=<ssl.SSLContext object at 0x0000021784D159F0> server_hostname='ppt-ai-gen-sm173.services.ai.azure.com' timeout=5.0
+2025-11-12 13:55:50,188 | DEBUG | httpcore.connection | start_tls.failed exception=ConnectError(ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-11-12 13:55:50,188 | DEBUG | openai._base_client | Encountered Exception
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 982, in request
+    response = self._client.send(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2025-11-12 13:55:50,195 | DEBUG | openai._base_client | 1 retry left
+2025-11-12 13:55:50,195 | INFO | openai._base_client | Retrying request to /embeddings in 0.863379 seconds
+2025-11-12 13:55:51,059 | DEBUG | openai._base_client | Request options: {'method': 'post', 'url': '/deployments/text-embedding-3-large/embeddings', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-c0acc9bb-8783-4c37-8d62-db83e24ac3d5', 'post_parser': <function Embeddings.create.<locals>.parser at 0x00000217FF81E160>, 'json_data': {'input': 'create a 5 slide corporate presentation on insurance architecture and migration.', 'model': 'text-embedding-3-large', 'encoding_format': 'base64'}}
+2025-11-12 13:55:51,060 | DEBUG | openai._base_client | Sending HTTP Request: POST https://ppt-ai-gen-sm173.services.ai.azure.com/api/projects/ppt-ai-gen-sm173-project/openai/deployments/text-embedding-3-large/embeddings?api-version=2024-05-01-preview
+2025-11-12 13:55:51,060 | DEBUG | httpcore.connection | connect_tcp.started host='ppt-ai-gen-sm173.services.ai.azure.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-11-12 13:55:51,357 | DEBUG | httpcore.connection | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002178D4BE210>
+2025-11-12 13:55:51,357 | DEBUG | httpcore.connection | start_tls.started ssl_context=<ssl.SSLContext object at 0x0000021784D159F0> server_hostname='ppt-ai-gen-sm173.services.ai.azure.com' timeout=5.0
+2025-11-12 13:55:51,590 | DEBUG | httpcore.connection | start_tls.failed exception=ConnectError(ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-11-12 13:55:51,591 | DEBUG | openai._base_client | Encountered Exception
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 982, in request
+    response = self._client.send(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2025-11-12 13:55:51,595 | DEBUG | openai._base_client | Raising connection error
+2025-11-12 13:55:51,595 | ERROR | ai-ppt-generator-chroma | Embedding failed: Connection error.
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 982, in request
+    response = self._client.send(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\search_utils.py", line 27, in get_embedding
+    resp = client.embeddings.create(model=EMBEDDING_MODEL, input=text)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\resources\embeddings.py", line 132, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/embeddings",
+        ^^^^^^^^^^^^^^
+    ...<8 lines>...
+        cast_to=CreateEmbeddingResponse,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 1014, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+2025-11-12 13:55:51,690 | INFO | ai-ppt-generator-chroma | Loaded 0 design JSONs and 0 text snippets for context.
+2025-11-12 13:55:51,693 | DEBUG | openai._base_client | Request options: {'method': 'post', 'url': '/deployments/gpt-4o-sm173/chat/completions', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-0f936490-5391-442f-98ca-adaa8a96fae2', 'json_data': {'messages': [{'role': 'system', 'content': 'You are an expert presentation designer. Your job is to create a presentation plan based on content and design references.\nOutput must be JSON only: list of slides, each with keys:\n{"title": str, "bullets": [str], "visual_required": bool, "visual_prompt": str (optional)}.\n\nUse reference texts for content and design JSONs for style. If retrieved references align in both design and content, add visuals. If not, decide on visuals independently.\nRespect any user-specified slide count or theme; if not provided, make your own best choice.\nTheme preference: Corporate.\n\nDesign Context (truncated): []\n\nReference snippets: []\n'}, {'role': 'user', 'content': 'Create a PowerPoint plan for: create a 5 slide corporate presentation on insurance architecture and migration.. Style/phase: Auto. Produce exactly 5 slides.'}], 'model': 'gpt-4o-sm173', 'max_tokens': 1500}}
+2025-11-12 13:55:51,694 | DEBUG | openai._base_client | Sending HTTP Request: POST https://ppt-ai-gen-sm173.services.ai.azure.com/api/projects/ppt-ai-gen-sm173-project/openai/deployments/gpt-4o-sm173/chat/completions?api-version=2024-05-01-preview
+2025-11-12 13:55:51,694 | DEBUG | httpcore.connection | connect_tcp.started host='ppt-ai-gen-sm173.services.ai.azure.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-11-12 13:55:52,001 | DEBUG | httpcore.connection | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002178D156D70>
+2025-11-12 13:55:52,001 | DEBUG | httpcore.connection | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000217FF81E5D0> server_hostname='ppt-ai-gen-sm173.services.ai.azure.com' timeout=5.0
+2025-11-12 13:55:52,228 | DEBUG | httpcore.connection | start_tls.failed exception=ConnectError(ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-11-12 13:55:52,229 | DEBUG | openai._base_client | Encountered Exception
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 982, in request
+    response = self._client.send(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2025-11-12 13:55:52,235 | DEBUG | openai._base_client | 2 retries left
+2025-11-12 13:55:52,235 | INFO | openai._base_client | Retrying request to /chat/completions in 0.463609 seconds
+2025-11-12 13:55:52,699 | DEBUG | openai._base_client | Request options: {'method': 'post', 'url': '/deployments/gpt-4o-sm173/chat/completions', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-0f936490-5391-442f-98ca-adaa8a96fae2', 'json_data': {'messages': [{'role': 'system', 'content': 'You are an expert presentation designer. Your job is to create a presentation plan based on content and design references.\nOutput must be JSON only: list of slides, each with keys:\n{"title": str, "bullets": [str], "visual_required": bool, "visual_prompt": str (optional)}.\n\nUse reference texts for content and design JSONs for style. If retrieved references align in both design and content, add visuals. If not, decide on visuals independently.\nRespect any user-specified slide count or theme; if not provided, make your own best choice.\nTheme preference: Corporate.\n\nDesign Context (truncated): []\n\nReference snippets: []\n'}, {'role': 'user', 'content': 'Create a PowerPoint plan for: create a 5 slide corporate presentation on insurance architecture and migration.. Style/phase: Auto. Produce exactly 5 slides.'}], 'model': 'gpt-4o-sm173', 'max_tokens': 1500}}
+2025-11-12 13:55:52,700 | DEBUG | openai._base_client | Sending HTTP Request: POST https://ppt-ai-gen-sm173.services.ai.azure.com/api/projects/ppt-ai-gen-sm173-project/openai/deployments/gpt-4o-sm173/chat/completions?api-version=2024-05-01-preview
+2025-11-12 13:55:52,700 | DEBUG | httpcore.connection | connect_tcp.started host='ppt-ai-gen-sm173.services.ai.azure.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-11-12 13:55:52,995 | DEBUG | httpcore.connection | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002178D157950>
+2025-11-12 13:55:52,996 | DEBUG | httpcore.connection | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000217FF81E5D0> server_hostname='ppt-ai-gen-sm173.services.ai.azure.com' timeout=5.0
+2025-11-12 13:55:53,222 | DEBUG | httpcore.connection | start_tls.failed exception=ConnectError(ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-11-12 13:55:53,223 | DEBUG | openai._base_client | Encountered Exception
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 982, in request
+    response = self._client.send(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2025-11-12 13:55:53,228 | DEBUG | openai._base_client | 1 retry left
+2025-11-12 13:55:53,228 | INFO | openai._base_client | Retrying request to /chat/completions in 0.878141 seconds
+2025-11-12 13:55:54,106 | DEBUG | openai._base_client | Request options: {'method': 'post', 'url': '/deployments/gpt-4o-sm173/chat/completions', 'headers': {'api-key': '<redacted>'}, 'files': None, 'idempotency_key': 'stainless-python-retry-0f936490-5391-442f-98ca-adaa8a96fae2', 'json_data': {'messages': [{'role': 'system', 'content': 'You are an expert presentation designer. Your job is to create a presentation plan based on content and design references.\nOutput must be JSON only: list of slides, each with keys:\n{"title": str, "bullets": [str], "visual_required": bool, "visual_prompt": str (optional)}.\n\nUse reference texts for content and design JSONs for style. If retrieved references align in both design and content, add visuals. If not, decide on visuals independently.\nRespect any user-specified slide count or theme; if not provided, make your own best choice.\nTheme preference: Corporate.\n\nDesign Context (truncated): []\n\nReference snippets: []\n'}, {'role': 'user', 'content': 'Create a PowerPoint plan for: create a 5 slide corporate presentation on insurance architecture and migration.. Style/phase: Auto. Produce exactly 5 slides.'}], 'model': 'gpt-4o-sm173', 'max_tokens': 1500}}
+2025-11-12 13:55:54,107 | DEBUG | openai._base_client | Sending HTTP Request: POST https://ppt-ai-gen-sm173.services.ai.azure.com/api/projects/ppt-ai-gen-sm173-project/openai/deployments/gpt-4o-sm173/chat/completions?api-version=2024-05-01-preview
+2025-11-12 13:55:54,108 | DEBUG | httpcore.connection | connect_tcp.started host='ppt-ai-gen-sm173.services.ai.azure.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-11-12 13:55:54,406 | DEBUG | httpcore.connection | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002178D3D7D10>
+2025-11-12 13:55:54,407 | DEBUG | httpcore.connection | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000217FF81E5D0> server_hostname='ppt-ai-gen-sm173.services.ai.azure.com' timeout=5.0
+2025-11-12 13:55:54,641 | DEBUG | httpcore.connection | start_tls.failed exception=ConnectError(ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-11-12 13:55:54,642 | DEBUG | openai._base_client | Encountered Exception
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 982, in request
+    response = self._client.send(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2025-11-12 13:55:54,646 | DEBUG | openai._base_client | Raising connection error
+2025-11-12 13:55:54,646 | ERROR | ai-ppt-generator-chroma | Plan generation failed: Connection error.
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 982, in request
+    response = self._client.send(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\generate_ppt.py", line 84, in call_llm_plan
+    resp = client.chat.completions.create(
+        model=CHAT_MODEL,
+        messages=[{"role":"system","content":sys_prompt},{"role":"user","content":user_prompt}],
+        max_tokens=1500
+    )
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1156, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<46 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)\.venv\Lib\site-packages\openai\_base_client.py", line 1014, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+2025-11-12 13:55:54,768 | INFO | azure.core.pipeline.policies.http_logging_policy | Request URL: 'https://2238880sa.blob.core.windows.net/generated-presentations?restype=REDACTED'
+Request method: 'PUT'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.1 Python/3.13.9 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '34f6408b-bfa1-11f0-9770-7ced8d9f6437'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-11-12 13:55:54,770 | DEBUG | urllib3.connectionpool | Starting new HTTPS connection (1): 2238880sa.blob.core.windows.net:443
+2025-11-12 13:55:56,174 | DEBUG | urllib3.connectionpool | https://2238880sa.blob.core.windows.net:443 "PUT /generated-presentations?restype=container HTTP/1.1" 409 230
+2025-11-12 13:55:56,206 | INFO | azure.core.pipeline.policies.http_logging_policy | Response status: 409
+Response headers:
+    'Content-Length': '230'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'e797f72d-101e-003f-5bad-539d5e000000'
+    'x-ms-client-request-id': '34f6408b-bfa1-11f0-9770-7ced8d9f6437'
+    'x-ms-version': 'REDACTED'
+    'x-ms-error-code': 'ContainerAlreadyExists'
+    'Date': 'Wed, 12 Nov 2025 08:25:56 GMT'
+2025-11-12 13:55:56,222 | INFO | azure.core.pipeline.policies.http_logging_policy | Request URL: 'https://2238880sa.blob.core.windows.net/generated-presentations/generated_a037d3fb.pptx'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '28263'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.1 Python/3.13.9 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '35d424e7-bfa1-11f0-ad21-7ced8d9f6437'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-11-12 13:55:56,603 | DEBUG | urllib3.connectionpool | https://2238880sa.blob.core.windows.net:443 "PUT /generated-presentations/generated_a037d3fb.pptx HTTP/1.1" 201 0
+2025-11-12 13:55:56,604 | INFO | azure.core.pipeline.policies.http_logging_policy | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Wed, 12 Nov 2025 08:25:56 GMT'
+    'ETag': '"0x8DE21C51A45A4B5"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'e797f854-101e-003f-6dad-539d5e000000'
+    'x-ms-client-request-id': '35d424e7-bfa1-11f0-ad21-7ced8d9f6437'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Wed, 12 Nov 2025 08:25:56 GMT'
+2025-11-12 13:55:56,605 | INFO | ai-ppt-generator-chroma | Uploaded generated PPT to Azure Blob: generated-presentations/generated_a037d3fb.pptx
+2025-11-12 13:55:56,606 | INFO | azure.core.pipeline.policies.http_logging_policy | Request URL: 'https://2238880sa.blob.core.windows.net/generated-presentations?restype=REDACTED'
+Request method: 'PUT'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.1 Python/3.13.9 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '360ec19a-bfa1-11f0-8964-7ced8d9f6437'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-11-12 13:55:56,607 | DEBUG | urllib3.connectionpool | Starting new HTTPS connection (1): 2238880sa.blob.core.windows.net:443
+2025-11-12 13:55:57,833 | DEBUG | urllib3.connectionpool | https://2238880sa.blob.core.windows.net:443 "PUT /generated-presentations?restype=container HTTP/1.1" 409 230
+2025-11-12 13:55:57,834 | INFO | azure.core.pipeline.policies.http_logging_policy | Response status: 409
+Response headers:
+    'Content-Length': '230'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '65f625ac-201e-009d-57ad-53a747000000'
+    'x-ms-client-request-id': '360ec19a-bfa1-11f0-8964-7ced8d9f6437'
+    'x-ms-version': 'REDACTED'
+    'x-ms-error-code': 'ContainerAlreadyExists'
+    'Date': 'Wed, 12 Nov 2025 08:25:57 GMT'
+2025-11-12 13:55:57,835 | INFO | azure.core.pipeline.policies.http_logging_policy | Request URL: 'https://2238880sa.blob.core.windows.net/generated-presentations/logs/generated_a037d3fb.pptx.json'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '334'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.1 Python/3.13.9 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '36ca5d31-bfa1-11f0-a799-7ced8d9f6437'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-11-12 13:55:58,034 | DEBUG | urllib3.connectionpool | https://2238880sa.blob.core.windows.net:443 "PUT /generated-presentations/logs/generated_a037d3fb.pptx.json HTTP/1.1" 201 0
+2025-11-12 13:55:58,035 | INFO | azure.core.pipeline.policies.http_logging_policy | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Wed, 12 Nov 2025 08:25:58 GMT'
+    'ETag': '"0x8DE21C51B1F683B"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '65f6265b-201e-009d-77ad-53a747000000'
+    'x-ms-client-request-id': '36ca5d31-bfa1-11f0-a799-7ced8d9f6437'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Wed, 12 Nov 2025 08:25:57 GMT'
+2025-11-12 13:55:58,035 | INFO | ai-ppt-generator-chroma | Uploaded log to Azure Blob: generated-presentations/logs/generated_a037d3fb.pptx.json
+(.venv) PS C:\Users\2238880\OneDrive - TZ Healthcare Solutions\Documents\Rahul\ai-ppt-generator-chroma-v2 (1)>
