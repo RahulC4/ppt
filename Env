@@ -1,0 +1,14 @@
+# GPT Model (Azure Foundry)
+GPT_ENDPOINT=https://<your-ai-foundry-project>.models.ai.azure.com/
+GPT_API_KEY=<your-foundry-key>
+GPT_MODEL=gpt-4o-sm173
+
+# Embedding Model (Azure OpenAI Resource)
+EMBEDDING_ENDPOINT=https://ppt-ai-gen-sm173.openai.azure.com/
+EMBEDDING_API_KEY=<your-azure-openai-resource-key>
+EMBEDDING_MODEL=text-embedding-3-large
+
+# DALL·E Model (Azure Foundry)
+DALLE_ENDPOINT=https://<your-ai-foundry-project>.models.ai.azure.com/
+DALLE_API_KEY=<your-foundry-key>
+DALLE_MODEL=dall-e-3
