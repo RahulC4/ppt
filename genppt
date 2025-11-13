@@ -1,0 +1,225 @@
+# generate_ppt.py (final version – auto-detect slides/theme + design-based visuals) 
+import os
+import tempfile
+import uuid
+import json
+import re
+import requests
+from pptx import Presentation
+from pptx.util import Inches, Pt
+from openai import AzureOpenAI
+from utils import get_env, safe_json_load, logger, now_ts, ensure_dir
+from search_utils import semantic_search
+from azure_blob_utils import upload_ppt_to_blob, upload_json_to_blob
+
+# Ensure directory exists
+try:
+    ensure_dir("design_jsons")
+except Exception:
+    os.makedirs("design_jsons", exist_ok=True)
+
+# === Azure OpenAI client ===
+client = AzureOpenAI(
+    azure_endpoint=get_env("OPENAI_API_BASE", required=True),
+    api_key=get_env("OPENAI_API_KEY", required=True),
+    api_version=get_env("OPENAI_API_VERSION", "2024-05-01-preview")
+)
+
+CHAT_MODEL = get_env("CHAT_MODEL", "gpt-4o")
+DALLE_MODEL = get_env("DALLE_MODEL", "dall-e-3")
+
+# ---------------------------------------------------------
+# Helper: detect slide count and theme from natural prompt
+# ---------------------------------------------------------
+def parse_user_intent(prompt: str):
+    """Extract number of slides and possible theme hints from user prompt."""
+    num_slides = None
+    theme = None
+
+    # detect numeric or word-based counts like "5 slides" or "five slides"
+    match = re.search(r'(\d+)\s+slides?', prompt.lower())
+    if match:
+        num_slides = int(match.group(1))
+
+    # detect theme keywords
+    theme_keywords = ["modern", "minimal", "corporate", "professional", "dark", "light", "colorful", "flat", "gradient"]
+    for word in theme_keywords:
+        if word in prompt.lower():
+            theme = word.capitalize()
+            break
+
+    return num_slides, theme
+
+
+# ---------------------------------------------------------
+# Helper: Generate slide plan with visual decisions
+# ---------------------------------------------------------
+def call_llm_plan(prompt, style, design_context, references_text, num_slides=None, theme=None):
+    """
+    Ask GPT to create a presentation plan including visual decisions.
+    """
+    sys_prompt = (
+        "You are an expert presentation designer. "
+        "Your job is to create a presentation plan based on content and design references.\n"
+        "Output must be JSON only: list of slides, each with keys:\n"
+        "{\"title\": str, \"bullets\": [str], \"visual_required\": bool, \"visual_prompt\": str (optional)}.\n\n"
+        "Use reference texts for content and design JSONs for style. "
+        "If retrieved references align in both design and content, add visuals. "
+        "If not, decide on visuals independently.\n"
+        "Respect any user-specified slide count or theme; if not provided, make your own best choice."
+    )
+
+    if theme:
+        sys_prompt += f"\nTheme preference: {theme}.\n"
+
+    design_excerpt = json.dumps(design_context, indent=None)[:4000]
+    refs_excerpt = json.dumps(references_text, indent=None)[:2000]
+    sys_prompt += f"\nDesign Context (truncated): {design_excerpt}\n\nReference snippets: {refs_excerpt}\n"
+
+    user_prompt = f"Create a PowerPoint plan for: {prompt}. Style/phase: {style}."
+    if num_slides:
+        user_prompt += f" Produce exactly {num_slides} slides."
+
+    try:
+        resp = client.chat.completions.create(
+            model=CHAT_MODEL,
+            messages=[
+                {"role": "system", "content": sys_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            max_tokens=1500
+        )
+        text = resp.choices[0].message.content
+        plan = safe_json_load(text)
+        if not plan:
+            logger.warning("LLM returned invalid JSON; using fallback outline.")
+            return [{"title": "Intro", "bullets": ["Overview"], "visual_required": False}]
+        return plan
+    except Exception as e:
+        logger.exception(f"Plan generation failed: {e}")
+        return [{"title": "Intro", "bullets": ["Overview"], "visual_required": False}]
+
+
+# ---------------------------------------------------------
+# Visual generator (DALL·E)
+# ---------------------------------------------------------
+def generate_visual_image(visual_prompt):
+    try:
+        resp = client.images.generate(model=DALLE_MODEL, prompt=visual_prompt, size="1024x1024")
+        url = resp.data[0].url
+        r = requests.get(url, timeout=20)
+        tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+        tmp.write(r.content)
+        tmp.close()
+        return tmp.name
+    except Exception as e:
+        logger.warning(f"Visual generation failed for '{visual_prompt}': {e}")
+        return None
+
+
+# ---------------------------------------------------------
+# PPT builder
+# ---------------------------------------------------------
+def build_ppt(slides):
+    prs = Presentation()
+    for s in slides:
+        layout = prs.slide_layouts[1] if len(prs.slide_layouts) > 1 else prs.slide_layouts[0]
+        slide = prs.slides.add_slide(layout)
+        try:
+            slide.shapes.title.text = s.get("title", "")
+        except Exception:
+            pass
+        try:
+            tf = slide.placeholders[1].text_frame
+            tf.clear()
+            for b in s.get("bullets", []):
+                p = tf.add_paragraph()
+                p.text = b
+                p.font.size = Pt(18)
+        except Exception:
+            pass
+        if s.get("image_path"):
+            try:
+                slide.shapes.add_picture(s["image_path"], Inches(0.5), Inches(3.0), width=Inches(8))
+            except Exception as e:
+                logger.debug(f"Failed to add visual: {e}")
+
+    out = os.path.join(tempfile.gettempdir(), f"generated_presentation_{uuid.uuid4().hex[:8]}.pptx")
+    prs.save(out)
+    return out
+
+
+# ---------------------------------------------------------
+# Main generation pipeline
+# ---------------------------------------------------------
+def generate_presentation(prompt: str,
+                          style: str = "Auto",
+                          requested_num_slides: int = None,
+                          theme: str = None,
+                          tag_filters: list = None):
+    """
+    Generate presentation from prompt.
+    GPT auto-detects slides & theme if not provided.
+    """
+    # Auto-detect number of slides and theme from prompt text
+    detected_slides, detected_theme = parse_user_intent(prompt)
+    requested_num_slides = requested_num_slides or detected_slides
+    theme = theme or detected_theme
+
+    # Retrieve up to top 10 references
+    refs = semantic_search(prompt, top_k=10, tags=tag_filters) or []
+
+    # Load design JSONs + reference text
+    design_context, reference_texts = [], []
+    for r in refs:
+        ppt_name = r.get("ppt_name")
+        text_snippet = (r.get("text") or "")[:400]
+        if text_snippet:
+            reference_texts.append(text_snippet)
+        json_path = os.path.join("design_jsons", f"{os.path.basename(ppt_name)}.json")
+        if os.path.exists(json_path):
+            try:
+                with open(json_path, "r", encoding="utf-8") as f:
+                    design_context.append(json.load(f))
+            except Exception:
+                pass
+
+    logger.info(f"Loaded {len(design_context)} design JSONs and {len(reference_texts)} text snippets for context.")
+
+    # Ask GPT to plan slides (deciding visuals, count, theme)
+    plan = call_llm_plan(prompt, style, design_context, reference_texts,
+                         num_slides=requested_num_slides, theme=theme)
+
+    # Generate visuals for slides where required
+    slides = []
+    for slide_plan in plan:
+        s = {
+            "title": slide_plan.get("title", "Untitled Slide"),
+            "bullets": slide_plan.get("bullets", []),
+            "image_path": None
+        }
+        if slide_plan.get("visual_required"):
+            visual_prompt = slide_plan.get("visual_prompt") or f"Professional visual for {s['title']}"
+            img = generate_visual_image(visual_prompt)
+            if img:
+                s["image_path"] = img
+        slides.append(s)
+
+    # Build PPT and upload
+    out_path = build_ppt(slides)
+    file_name = f"generated_{uuid.uuid4().hex[:8]}.pptx"
+    upload_ppt_to_blob(out_path, file_name)
+
+    log = {
+        "timestamp": now_ts(),
+        "prompt": prompt,
+        "style": style,
+        "theme": theme,
+        "requested_num_slides": requested_num_slides,
+        "used_design_jsons": len(design_context),
+        "references_used": len(reference_texts),
+        "slides_count": len(slides),
+        "generated_file": file_name
+    }
+    upload_json_to_blob(json.dumps(log, indent=2).encode("utf-8"), blob_name=f"logs/{file_name}.json")
+    return out_path, log
