@@ -1,31 +1,24 @@
-# test_generate_ppt.py
+# test_generate.py
 import os
 from generate_ppt import generate_presentation
 from utils import logger
 
-if __name__ == "__main__":
-    logger.info("🧪 Starting PPT generation test...")
+print("\n==============================")
+print(" TEST: generate_presentation()")
+print("==============================\n")
 
-    try:
-        prompt = "Create a healthcare migration deck with 5 slides focused on design and testing."
+try:
+    out_path, log = generate_presentation(
+        prompt="Create a 3-slide corporate presentation about AI in healthcare Insurance with images.",
+        style="Design",       
+        tag_filters=["Design"]
+    )
 
-        output_path, metadata = generate_presentation(
-            prompt=prompt,
-            style="Professional",
-            requested_num_slides=None,     # let auto-detect override
-            theme=None,                    # let auto-detect handle
-            tag_filters=None               # no tag filtering for test
-        )
+    print("\n--- SUCCESS ---")
+    print("PPT generated at:", out_path)
+    print("Metadata log:\n", log)
 
-        print("\n================= TEST RESULT =================")
-        print(f"PPT generated at local path: {output_path}")
-        print("Metadata:")
-        for k, v in metadata.items():
-            print(f"  {k}: {v}")
-
-        print("\nIf upload succeeded, PPT should also appear in your Azure Blob:")
-        print(f"Blob Path: {metadata.get('ppt_file')}")
-
-    except Exception as e:
-        logger.exception("❌ Test failed:")
-        print(f"Error: {e}")
+except Exception as e:
+    print("\n--- FAILED ---")
+    logger.exception("Error while generating PPT")
+    print("Error:", e)
