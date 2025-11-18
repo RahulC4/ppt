@@ -65,6 +65,9 @@ def call_llm_plan(prompt, style, design_context, references_text,
         "Create a structured slide plan.\n"
         "Return ONLY valid JSON in this list format:\n"
         "[{\"title\": str, \"bullets\": [str], \"visual_required\": bool, \"visual_prompt\": str}]\n"
+        "Use the design JSONs for style cues and reference snippets for content.\n"
+        "If both match well, enable visuals. Otherwise, decide independently.\n"
+        "If slide count or theme is detected from user text, follow it.\n"
         "If the user explicitly asks for images, ALWAYS set visual_required to true.\n"
         "Do NOT include explanations. Output JSON only.\n"
     )
