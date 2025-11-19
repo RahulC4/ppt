@@ -1,0 +1,15 @@
+Sample PPT templates are stored in Azure Blob Storage.
+
+Their content is embedded using OpenAI Text Embedding 3 Large.
+
+The embeddings are saved in ChromaDB (local folder inside the repo).
+
+Design elements from template PPTs are extracted and saved as JSON in a design_json folder.
+
+python-pptx is used to generate the final PowerPoint slides.
+
+GPT-5 Mini generates slide text/content.
+
+Image 1 Mini generates any images needed for slides.
+
+Streamlit UI provides a simple front-end for users to interact with the app.
