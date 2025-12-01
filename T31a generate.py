@@ -1,0 +1,361 @@
+# ============================================================
+# generate_ppt.py – NO JSON | Images Checkbox | Safe Scaling
+# + Local Template Support
+# ============================================================
+
+import os
+import tempfile
+import uuid
+import json
+import re
+import base64
+
+from pptx import Presentation
+from pptx.util import Inches, Pt
+from PIL import Image
+
+from utils import (
+    get_env, logger, now_ts,
+    ensure_dir, text_client, image_client
+)
+from search_utils import semantic_search
+from azure_blob_utils import upload_ppt_to_blob, upload_json_to_blob
+
+ensure_dir("generated")
+
+CHAT_MODEL = get_env("CHAT_MODEL", required=True)
+IMAGE_MODEL = get_env("IMAGE_MODEL", required=True)
+
+
+# ------------------------------------------------------------
+# TEMPLATE RESOLVER (new)
+# ------------------------------------------------------------
+def resolve_template_path(template_style):
+    """
+    Map template_style from UI to a local .pptx template file.
+
+    - If style is "Corporate" -> templates/corporate.pptx
+    - If style is "Auto" or missing -> None (use default blank)
+    - If file not found -> None (fallback to default)
+    """
+    if not template_style or template_style == "Auto":
+        return None
+
+    # You can extend this map later with more templates
+    mapping = {
+        "Corporate": "templates/corporate.pptx",
+        "Plant": "templates/plant.pptx",
+        "Dark": "templates/dark.pptx",
+        "Minimal": "templates/minimal.pptx",
+    }
+
+    rel_path = mapping.get(template_style)
+    if not rel_path:
+        logger.warning(f"No template mapping found for style '{template_style}', using default.")
+        return None
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    abs_path = os.path.join(base_dir, rel_path)
+
+    if not os.path.exists(abs_path):
+        logger.warning(f"Template file for style '{template_style}' not found at {abs_path}, using default.")
+        return None
+
+    return abs_path
+
+
+# ------------------------------------------------------------
+# HELPERS
+# ------------------------------------------------------------
+def parse_user_intent(prompt: str):
+    match = re.search(r"(\d+)\s+slides?", prompt.lower())
+    if match:
+        return int(match.group(1))
+    return None
+
+
+def fallback_plan(n):
+    slides = []
+    for i in range(n):
+        slides.append({
+            "title": f"Slide {i+1}",
+            "bullets": [
+                f"Key takeaway for slide {i+1}",
+                f"Supporting detail {i+1}.1",
+                f"Supporting detail {i+1}.2",
+            ]
+        })
+    return slides
+
+
+# ------------------------------------------------------------
+# ✅ TEXT-BASED LLM (NO JSON)
+# ------------------------------------------------------------
+def call_llm_plan(prompt, references_text=None, num_slides=5):
+    references_text = references_text or []
+
+    sys_prompt = (
+        "You are a professional presentation creator.\n\n"
+        "Return the slide plan in this EXACT TEXT format only:\n\n"
+        "Slide 1: Title\n"
+        "- Bullet\n"
+        "- Bullet\n"
+        "- Bullet\n\n"
+        f"You MUST create exactly {num_slides} slides.\n"
+        "Do NOT return JSON.\n"
+        "Do NOT add explanations.\n\n"
+        "Reference content:\n"
+        f\"{' '.join(references_text)[:2500]}\"
+    )
+
+    user_prompt = f"Create a professional presentation for: {prompt}"
+
+    try:
+        resp = text_client.chat.completions.create(
+            model=CHAT_MODEL,
+            messages=[
+                {"role": "system", "content": sys_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            max_completion_tokens=1400,
+            temperature=0.7,
+        )
+
+        raw_text = resp.choices[0].message.content.strip()
+        return parse_text_plan(raw_text, num_slides)
+
+    except Exception as e:
+        logger.warning(f"LLM failed → fallback used: {e}")
+        return fallback_plan(num_slides)
+
+
+# ------------------------------------------------------------
+# ✅ TEXT → STRUCTURED SLIDES
+# ------------------------------------------------------------
+def parse_text_plan(text, num_slides):
+    slides = []
+
+    blocks = re.split(r"\n(?=Slide \d+:)", text)
+
+    for block in blocks:
+        lines = [l.strip() for l in block.split("\n") if l.strip()]
+        if not lines:
+            continue
+
+        title_line = lines[0]
+        title = title_line.replace("Slide", "").split(":", 1)[-1].strip()
+
+        bullets = []
+        for l in lines[1:]:
+            if l.startswith("-"):
+                bullets.append(l.replace("-", "").strip())
+
+        # ✅ Enforce minimum bullets per slide
+        if len(bullets) < 3:
+            bullets += [f"Additional point {i+1}" for i in range(3 - len(bullets))]
+
+        slides.append({
+            "title": title,
+            "bullets": bullets[:6],  # ✅ cap to avoid overflow
+        })
+
+    # ✅ Enforce slide count strictly
+    if len(slides) < num_slides:
+        return None  # 🚨 Signals "insufficient content"
+
+    return slides[:num_slides]
+
+
+# ------------------------------------------------------------
+# IMAGE GENERATION (OPTIONAL)
+# ------------------------------------------------------------
+def generate_visual_image(prompt: str):
+    try:
+        resp = image_client.images.generate(
+            model=IMAGE_MODEL,
+            prompt=prompt + " Professional minimal illustration. No text.",
+            size="1024x1024",
+        )
+
+        b64 = getattr(resp.data[0], "b64_json", None)
+        if not b64:
+            return None
+
+        img_bytes = base64.b64decode(b64)
+        tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+        tmp.write(img_bytes)
+        tmp.close()
+        return tmp.name
+
+    except Exception:
+        logger.exception("Image generation failed")
+        return None
+
+
+# ------------------------------------------------------------
+# PPT BUILDER (now supports templates)
+# ------------------------------------------------------------
+def build_ppt(slides, template_style=None):
+    """
+    Build PPT using:
+      - a local template file if template_style is mapped & exists
+      - otherwise a blank default Presentation()
+    """
+    template_path = resolve_template_path(template_style)
+
+    if template_path:
+        try:
+            prs = Presentation(template_path)
+            logger.info(f"Using template '{template_style}' from {template_path}")
+        except Exception:
+            logger.exception("Failed to load template, falling back to blank presentation.")
+            prs = Presentation()
+    else:
+        prs = Presentation()
+
+    for sp in slides:
+        # Use standard "Title and Content" layout if possible
+        layout_idx = 1 if len(prs.slide_layouts) > 1 else 0
+        slide = prs.slides.add_slide(prs.slide_layouts[layout_idx])
+
+        # Title
+        try:
+            slide.shapes.title.text = sp["title"]
+        except Exception:
+            # If template doesn't have a standard title placeholder
+            try:
+                title_box = slide.shapes.add_textbox(
+                    Inches(0.5), Inches(0.5), prs.slide_width - Inches(1), Inches(1)
+                )
+                title_box.text_frame.text = sp["title"]
+            except Exception:
+                logger.exception("Failed to set slide title")
+
+        # Body placeholder
+        try:
+            body = slide.placeholders[1]
+        except Exception:
+            body = slide.shapes.add_textbox(
+                Inches(0.5),
+                Inches(1.5),
+                prs.slide_width - Inches(1),
+                prs.slide_height - Inches(2),
+            )
+
+        tf = body.text_frame
+        tf.clear()
+
+        for b in sp["bullets"]:
+            p = tf.add_paragraph()
+            p.text = b
+            p.font.size = Pt(20)
+
+        body.top = slide.shapes.title.top + slide.shapes.title.height + Inches(0.3) \
+            if slide.shapes.title else Inches(1.5)
+
+        if sp.get("image_path"):
+            try:
+                # Split layout: text left, image right
+                body.left = Inches(0.5)
+                body.width = prs.slide_width - Inches(4.0)
+
+                img = Image.open(sp["image_path"])
+                w, h = img.size
+                aspect = w / h if h else 1.0
+
+                max_w = Inches(3.0)
+                max_h = Inches(2.5)
+
+                if aspect >= 1:
+                    final_w = max_w
+                    final_h = final_w / aspect
+                else:
+                    final_h = max_h
+                    final_w = final_h * aspect
+
+                left = prs.slide_width - final_w - Inches(0.5)
+                top = body.top
+
+                slide.shapes.add_picture(
+                    sp["image_path"],
+                    left,
+                    top,
+                    width=final_w,
+                    height=final_h,
+                )
+            except Exception:
+                logger.exception("Image placement failed")
+        else:
+            # NO IMAGE → full width
+            body.left = Inches(0.5)
+            body.width = prs.slide_width - Inches(1.0)
+
+    out_path = os.path.join(
+        tempfile.gettempdir(), f"generated_{uuid.uuid4().hex[:8]}.pptx"
+    )
+    prs.save(out_path)
+    return out_path
+
+
+# ------------------------------------------------------------
+# ✅ FINAL SAFE PIPELINE
+# ------------------------------------------------------------
+def generate_presentation(
+    prompt,
+    requested_num_slides=5,
+    tag_filters=None,
+    template_style=None,
+    image_required=False,
+):
+    refs = semantic_search(prompt, top_k=5, tags=tag_filters) or []
+
+    if not refs:
+        return None, {"error": True, "message": "No matching content found in sample PPTs."}
+
+    reference_text = [(r.get("text") or "")[:500] for r in refs]
+
+    detected_slides = parse_user_intent(prompt)
+    num_slides = requested_num_slides or detected_slides or 5
+
+    plan = call_llm_plan(
+        prompt=prompt,
+        references_text=reference_text,
+        num_slides=num_slides,
+    )
+
+    # 🚨 HARD STOP if not enough content
+    if not plan:
+        return None, {
+            "error": True,
+            "message": "Not enough relevant content to generate this many slides. Try fewer slides or rephrase."
+        }
+
+    slides = []
+    for sp in plan:
+        img_path = generate_visual_image(sp["title"]) if image_required else None
+
+        slides.append({
+            "title": sp["title"],
+            "bullets": sp["bullets"],
+            "image_path": img_path,
+        })
+
+    # 🔹 Build PPT with template_style applied
+    out_path = build_ppt(slides, template_style=template_style)
+
+    fname = f"generated_{uuid.uuid4().hex[:8]}.pptx"
+    upload_ppt_to_blob(out_path, fname)
+
+    log = {
+        "timestamp": now_ts(),
+        "prompt": prompt,
+        "slides_generated": len(slides),
+        "ppt_file": fname,
+        "error": False,
+        "image_required": image_required,
+        "template_style": template_style,
+    }
+
+    upload_json_to_blob(json.dumps(log, indent=2).encode(), f"logs/{fname}.json")
+
+    return out_path, log
