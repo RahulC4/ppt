@@ -93,7 +93,7 @@ def call_llm_plan(prompt, references_text=None, num_slides=5):
         "- Do NOT add explanations.\n"
         "- Do NOT put multiple slides inside a single 'Slide X'.\n\n"
         "Use this content as reference:\n"
-        f\"{' '.join(references_text)[:2500]}\"
+        f"{' '.join(references_text)[:2500]}"
     )
 
     user_prompt = f"Create a professional presentation for: {prompt}"
