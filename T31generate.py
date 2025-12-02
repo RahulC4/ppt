@@ -80,7 +80,7 @@ def call_llm_plan(prompt, references_text=None, num_slides=5):
                 {"role": "user", "content": user_prompt},
             ],
             max_completion_tokens=1400,
-            temperature=0.7,
+            temperature=1,
         )
 
         raw_text = resp.choices[0].message.content.strip()
