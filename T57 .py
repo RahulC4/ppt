@@ -1,0 +1,41 @@
+# ============================================================
+# 🎯 GENERATE & DOWNLOAD PPT
+# ============================================================
+if generated_clicked:
+    if not prompt.strip():
+        st.error("Please enter a prompt.")
+    else:
+        with st.spinner("Generating final PowerPoint , usually takes less than 60s..."):
+            try:
+                if template_style.lower() =="corporate":
+                    ppt_path, log = generate_presentation(
+                        prompt=prompt,
+                        requested_num_slides=num_slides,
+                        template_style=template_style,
+                        image_required=image_required,
+                    )
+                else:
+                    ppt_path, log = generate_presentation_auto(
+                        prompt=prompt,
+                        requested_num_slides=num_slides,
+                        template_style=template_style,
+                        image_required=image_required,
+                    )
+
+                    if log.get("error"):
+                        st.warning(f"⚠️ {log.get('message')}")
+                    else:
+                        st.success("✅ PPT Generated Successfully!")
+
+                        display_name = os.path.basename(ppt_path) if ppt_path else "generated_presentation.pptx"
+
+                        st.session_state["generated_ppts"].append(
+                            {"path": ppt_path, "name": display_name}
+                        )
+
+                        st.subheader("📄 Generation Log")
+                        st.json(log)
+
+
+
+          
