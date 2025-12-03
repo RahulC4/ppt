@@ -127,7 +127,7 @@ def update_date(slide):
                 shp.text = current
 
 
-def add_bullet_textbox(slide, bullets, left, top, width, height, font_size=20):
+def add_bullet_textbox(slide, bullets, left, top, width, height, font_size=20,color=RGBColor(0,0,0)):
     tb = slide.shapes.add_textbox(left, top, width, height)
     tf = tb.text_frame
     tf.word_wrap = True
@@ -138,7 +138,7 @@ def add_bullet_textbox(slide, bullets, left, top, width, height, font_size=20):
         p.text = b
         p.level = 0
         p.font.size = Pt(font_size)
-        p.font.color.rgb = RGBColor(0, 0, 0)
+        p.font.color.rgb = color
 
     return tb
 
@@ -178,7 +178,7 @@ def generate_visual_image(prompt: str):
 
 def add_image_to_right(slide, body_shape, img_path: str):
     try:
-        left = body_shape.left + body_shape.width + Inches(0.3)
+        left = body_shape.left + body_shape.width + Inches(0.15)
         top = body_shape.top
         slide.shapes.add_picture(img_path, left, top, width=Inches(2.8))
     except Exception:
@@ -215,9 +215,10 @@ def build_corporate_ppt(plan, image_required=False):
         agenda_items,
         left=Inches(1),
         top=Inches(2),
-        width=prs.slide_width - Inches(4) if image_required else prs.slide_width - Inches(2),
+        width=prs.slide_width - Inches(4.5) if image_required else prs.slide_width - Inches(2),
         height=Inches(4),
-        font_size=28,
+        font_size=32,
+        color = RGBColor(0,102,204)
     )
 
     if image_required:
@@ -235,7 +236,7 @@ def build_corporate_ppt(plan, image_required=False):
             sp["bullets"],
             left=Inches(1),
             top=Inches(2),
-            width=prs.slide_width - Inches(4) if image_required else prs.slide_width - Inches(2),
+            width=prs.slide_width - Inches(4.5) if image_required else prs.slide_width - Inches(2),
             height=Inches(4.5),
             font_size=20,
         )
