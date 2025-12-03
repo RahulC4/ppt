@@ -80,7 +80,7 @@ def call_llm_plan(prompt, references_text=None, num_slides=5):
                 {"role": "user", "content": prompt},
             ],
             max_completion_tokens=1400,
-            temperature=0.7,
+            temperature=1,
         )
 
         raw = resp.choices[0].message.content.strip()
@@ -232,13 +232,15 @@ def generate_presentation(
     detected = parse_user_intent(prompt)
     num_slides = requested_num_slides or detected or 5
 
-    plan = call_llm_plan(prompt, references_text, num_slides)
+    plan = call_llm_plan(prompt, reference_text, num_slides)
 
-    if template_style == "corporate":
+    template_key = (template_style or "").lower()
+
+    if template_key == "corporate":
         ppt_path = build_corporate_ppt(plan)
         total_slides = len(plan) + 3
     else:
-        raise ValueError("Only corporate mode supported in this build")
+        ppt_path =build_corporate_ppt(plan)
 
     fname = f"generated_{uuid.uuid4().hex[:8]}.pptx"
     upload_ppt_to_blob(ppt_path, fname)
