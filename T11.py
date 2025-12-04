@@ -52,3 +52,21 @@ apply_background(slide)
 thank_slide = prs.slides.add_slide(prs.slide_layouts[1])
 apply_background(thank_slide)
 
+
+def extract_title_from_ppt(ppt_path):
+    try:
+        prs = Presentation(ppt_path)
+        if prs.slides and prs.slides[0].shapes.title:
+            return prs.slides[0].shapes.title.text.strip()
+    except Exception:
+        pass
+    return "Generated Presentation"
+
+ppt_title = extract_title_from_ppt(ppt_path)
+display_name = f"{ppt_title}.pptx"
+
+st.session_state["generated_ppts"].insert(
+    0,   # ✅ keeps newest on top
+    {"path": ppt_path, "name": display_name}
+)
+
