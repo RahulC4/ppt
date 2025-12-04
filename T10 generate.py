@@ -32,6 +32,12 @@ IMAGE_MODEL = get_env("IMAGE_MODEL", required=True)
 # ------------------------------------------------------------
 # HELPERS
 # ------------------------------------------------------------
+def apply_background(slide):
+    fill = slide.background.fill
+    fill.solid()
+    fill.fore_color.rgb = RGBColor(242, 244, 247)  # #EAF2FB
+
+
 def parse_user_intent(prompt: str):
     match = re.search(r"(\d+)\s+slides?", prompt.lower())
     if match:
@@ -149,12 +155,19 @@ def build_ppt(slides, agenda_titles, image_required):
 
     # ✅ TITLE SLIDE
     title_slide = prs.slides.add_slide(prs.slide_layouts[0])
+    apply_background(title_slide)
     title_slide.shapes.title.text = slides[0]["title"]
+    title_shape = title_slide.shapes.title
+    title_shape.text = slides[0]["title"]
+
+    for p in title_shape.text_frame.paragraphs:
+        p.font.color.rgb = RGBColor(0, 102, 204)  # Corporate Blue
     subtitle = title_slide.placeholders[1]
     subtitle.text = datetime.now().strftime("%B %Y")
 
     # ✅ AGENDA SLIDE
     agenda_slide = prs.slides.add_slide(prs.slide_layouts[1])
+    apply_background(agenda_slide)
     agenda_slide.shapes.title.text = "Agenda"
     title_tf = agenda_slide.shapes.title.text_frame
     p = title_tf.paragraphs[0]
@@ -195,6 +208,7 @@ def build_ppt(slides, agenda_titles, image_required):
     # ✅ CONTENT SLIDES (UNCHANGED LOGIC)
     for sp in slides:
         slide = prs.slides.add_slide(prs.slide_layouts[1])
+        apply_background(slide)
         slide.shapes.title.text = sp["title"]
         title_tf = slide.shapes.title.text_frame
         p = title_tf.paragraphs[0]
@@ -232,8 +246,14 @@ def build_ppt(slides, agenda_titles, image_required):
 
     # ✅ THANK YOU SLIDE (NO IMAGE)
     thank_slide = prs.slides.add_slide(prs.slide_layouts[5])
+    apply_background(thank_slide)
     thank_slide.shapes.title.text = "Thank You"
+    thank_shape = thank_slide.shapes.title
+    thank_shape.text = "Thank You"
 
+    for p in thank_shape.text_frame.paragraphs:
+        p.font.color.rgb = RGBColor(0, 102, 204)  # Corporate Blue
+        p.font.bold = True
     out_path = os.path.join(tempfile.gettempdir(), f"generated_{uuid.uuid4().hex[:8]}.pptx")
     prs.save(out_path)
     return out_path
