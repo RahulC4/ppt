@@ -181,6 +181,9 @@ def build_ppt(slides, agenda_titles, image_required):
                 body.top,
                 width=Inches(3),
             )
+    else:
+            body.left = Inches(0.5)
+            body.width = prs.slide_width - Inches(1)
 
     # ✅ CONTENT SLIDES (UNCHANGED LOGIC)
     for sp in slides:
@@ -216,7 +219,7 @@ def build_ppt(slides, agenda_titles, image_required):
             body.width = prs.slide_width - Inches(1)
 
     # ✅ THANK YOU SLIDE (NO IMAGE)
-    thank_slide = prs.slides.add_slide(prs.slide_layouts[1])
+    thank_slide = prs.slides.add_slide(prs.slide_layouts[5])
     thank_slide.shapes.title.text = "Thank You"
 
     out_path = os.path.join(tempfile.gettempdir(), f"generated_{uuid.uuid4().hex[:8]}.pptx")
