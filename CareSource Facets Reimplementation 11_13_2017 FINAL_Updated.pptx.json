@@ -1,0 +1,770 @@
+{
+  "ppt_name": "CareSource Facets Reimplementation 11_13_2017 FINAL_Updated.pptx",
+  "extracted_on": "2025-11-11T11:39:10.140345Z",
+  "theme_colors": [],
+  "font_families": [
+    "Calibri",
+    "+mj-lt",
+    "Arial"
+  ],
+  "slide_layouts": [
+    "Blank with Header",
+    "1_Keep Challenging w/ animation",
+    "2_Cover Slide - White"
+  ],
+  "slides": [
+    {
+      "layout": "2_Cover Slide - White",
+      "background_color": null,
+      "images": [],
+      "shapes": [],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 0,
+      "slide_number": 1
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 1,
+      "slide_number": 2
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 2,
+      "slide_number": 3
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [
+        "Picture 62"
+      ],
+      "shapes": [
+        "ROUNDED_RECTANGLE (5)",
+        "LEFT_RIGHT_ARROW (37)",
+        "LEFT_RIGHT_ARROW (37)",
+        "PENTAGON (51)",
+        "PENTAGON (51)",
+        "PENTAGON (51)",
+        "CHEVRON (52)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "PENTAGON (51)",
+        "CHEVRON (52)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "LEFT_RIGHT_ARROW (37)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 3,
+      "slide_number": 4
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "OVAL (9)",
+        "OVAL (9)",
+        "OVAL (9)",
+        "OVAL (9)",
+        "OVAL (9)",
+        "OVAL (9)",
+        "PENTAGON (51)",
+        "PENTAGON (51)",
+        "PENTAGON (51)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "OVAL (9)",
+        "OVAL (9)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)"
+      ],
+      "charts": [],
+      "tables": [
+        "Table 2"
+      ],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 4,
+      "slide_number": 5
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "STAR_5_POINT (92)",
+        "STAR_5_POINT (92)",
+        "STAR_5_POINT (92)"
+      ],
+      "charts": [],
+      "tables": [
+        "Table 3"
+      ],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [
+        "#4CB3CF",
+        "#6BB445"
+      ],
+      "index": 5,
+      "slide_number": 6
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [
+        "Picture 33",
+        "Picture 34",
+        "Picture 3",
+        "Picture 3",
+        "Picture 3"
+      ],
+      "shapes": [
+        "RECTANGLE (1)",
+        "TRAPEZOID (3)",
+        "RECTANGLE (1)",
+        "ROUND_2_SAME_RECTANGLE (152)",
+        "ROUND_2_SAME_RECTANGLE (152)",
+        "ROUND_2_SAME_RECTANGLE (152)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [
+        "#00B0F0"
+      ],
+      "index": 6,
+      "slide_number": 7
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [
+        "Picture 59"
+      ],
+      "shapes": [
+        "RECTANGLE (1)",
+        "PENTAGON (51)",
+        "PENTAGON (51)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 7,
+      "slide_number": 8
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)"
+      ],
+      "charts": [],
+      "tables": [
+        "Table 8"
+      ],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 8,
+      "slide_number": 9
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "PENTAGON (51)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)",
+        "DIAMOND (4)"
+      ],
+      "charts": [],
+      "tables": [
+        "Table 8"
+      ],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 9,
+      "slide_number": 10
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [
+        "Picture 2",
+        "Picture 2"
+      ],
+      "shapes": [
+        "RECTANGLE (1)",
+        "OVAL (9)",
+        "OVAL (9)",
+        "OVAL (9)",
+        "RECTANGLE (1)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "OVAL (9)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "OVAL (9)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [
+        "#3085BA",
+        "#8A4500",
+        "#598D5F"
+      ],
+      "index": 10,
+      "slide_number": 11
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [
+        "Picture 14",
+        "Picture 19",
+        "Picture 20"
+      ],
+      "shapes": [
+        "PENTAGON (51)",
+        "PENTAGON (51)",
+        "HEXAGON (10)",
+        "PENTAGON (51)",
+        "PENTAGON (51)",
+        "HEXAGON (10)",
+        "PENTAGON (51)",
+        "PENTAGON (51)",
+        "HEXAGON (10)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [
+        "#51639D",
+        "#199E19",
+        "#007692"
+      ],
+      "index": 11,
+      "slide_number": 12
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [
+        "Picture 19"
+      ],
+      "shapes": [],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 12,
+      "slide_number": 13
+    },
+    {
+      "layout": "1_Keep Challenging w/ animation",
+      "background_color": null,
+      "images": [],
+      "shapes": [],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 13,
+      "slide_number": 14
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [
+        "Picture 6"
+      ],
+      "shapes": [
+        "ISOSCELES_TRIANGLE (7)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 14,
+      "slide_number": 15
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [
+        "Table 4"
+      ],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 15,
+      "slide_number": 16
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [],
+      "charts": [],
+      "tables": [
+        "Table 1"
+      ],
+      "icons": [],
+      "text_fonts": [],
+      "accent_colors": [],
+      "index": 16,
+      "slide_number": 17
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 17,
+      "slide_number": 18
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 18,
+      "slide_number": 19
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [
+        "Table 4"
+      ],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 19,
+      "slide_number": 20
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 20,
+      "slide_number": 21
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 21,
+      "slide_number": 22
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 22,
+      "slide_number": 23
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [
+        "Picture 2",
+        "Picture 2",
+        "Picture 501",
+        "Picture 4",
+        "Picture 4",
+        "Picture 4",
+        "Picture 505",
+        "Picture 506",
+        "Picture 2",
+        "Picture 508",
+        "Picture 509",
+        "Picture 2",
+        "Picture 524",
+        "Picture 529",
+        "Picture 4",
+        "Picture 4",
+        "Picture 167",
+        "Picture 483"
+      ],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "CAN (13)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "CAN (13)",
+        "ROUNDED_RECTANGLE (5)",
+        "ROUNDED_RECTANGLE (5)",
+        "RECTANGLE (1)",
+        "ROUND_2_SAME_RECTANGLE (152)",
+        "CAN (13)",
+        "CAN (13)",
+        "CAN (13)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [
+        "#141414",
+        "#2470A2",
+        "#0070C0",
+        "#00A3E0",
+        "#63769B",
+        "#05BC58",
+        "#FF0000"
+      ],
+      "index": 23,
+      "slide_number": 24
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [
+        "#00B050"
+      ],
+      "index": 24,
+      "slide_number": 25
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 25,
+      "slide_number": 26
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 26,
+      "slide_number": 27
+    },
+    {
+      "layout": "Blank with Header",
+      "background_color": null,
+      "images": [],
+      "shapes": [
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)",
+        "RECTANGLE (1)"
+      ],
+      "charts": [],
+      "tables": [],
+      "icons": [],
+      "text_fonts": [
+        "+mj-lt"
+      ],
+      "accent_colors": [],
+      "index": 27,
+      "slide_number": 28
+    }
+  ]
+}
