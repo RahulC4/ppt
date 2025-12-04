@@ -70,3 +70,8 @@ st.session_state["generated_ppts"].insert(
     {"path": ppt_path, "name": display_name}
 )
 
+
+ppt_title = extract_title_from_ppt(ppt_path)
+
+timestamp = datetime.now().strftime("%d_%b_%H-%M")
+display_name = f"{ppt_title}_{timestamp}.pptx"
