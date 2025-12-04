@@ -1,5 +1,5 @@
 # ============================================================
-# generate_ppt.py – NO JSON | Images Checkbox | Safe Scaling | AUTO SIZE FIX
+# generate_ppt.py – AUTO | Title + Agenda + Thank You | Safe Scaling
 # ============================================================
 
 import os
@@ -8,12 +8,14 @@ import uuid
 import json
 import re
 import base64
+from datetime import datetime
 
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.enum.text import MSO_AUTO_SIZE
 from PIL import Image
-
+from pptx.dml.color import RGBColor
+from pptx.enum.text import PP_ALIGN
 from utils import (
     get_env, logger, now_ts,
     ensure_dir, text_client, image_client
@@ -52,7 +54,7 @@ def fallback_plan(n):
 
 
 # ------------------------------------------------------------
-# ✅ TEXT-BASED LLM (NO JSON)
+# ✅ TEXT-BASED LLM
 # ------------------------------------------------------------
 def call_llm_plan_auto(prompt, references_text=None, num_slides=5):
     references_text = references_text or []
@@ -93,42 +95,29 @@ def call_llm_plan_auto(prompt, references_text=None, num_slides=5):
 
 
 # ------------------------------------------------------------
-# ✅ TEXT → STRUCTURED SLIDES
+# ✅ TEXT → STRUCTURED
 # ------------------------------------------------------------
 def parse_text_plan(text, num_slides):
     slides = []
-
     blocks = re.split(r"\n(?=Slide \d+:)", text)
 
     for block in blocks:
         lines = [l.strip() for l in block.split("\n") if l.strip()]
-        if not lines:
-            continue
-
         title_line = lines[0]
         title = title_line.replace("Slide", "").split(":", 1)[-1].strip()
 
-        bullets = []
-        for l in lines[1:]:
-            if l.startswith("-"):
-                bullets.append(l.replace("-", "").strip())
+        bullets = [l.replace("-", "").strip() for l in lines[1:] if l.startswith("-")]
 
         if len(bullets) < 3:
             bullets += [f"Additional point {i+1}" for i in range(3 - len(bullets))]
 
-        slides.append({
-            "title": title,
-            "bullets": bullets[:6],
-        })
-
-    if len(slides) < num_slides:
-        return None
+        slides.append({"title": title, "bullets": bullets[:6]})
 
     return slides[:num_slides]
 
 
 # ------------------------------------------------------------
-# IMAGE GENERATION (OPTIONAL)
+# ✅ IMAGE GENERATION
 # ------------------------------------------------------------
 def generate_visual_image(prompt: str):
     try:
@@ -149,23 +138,72 @@ def generate_visual_image(prompt: str):
         return tmp.name
 
     except Exception:
-        logger.exception("Image generation failed")
         return None
 
 
 # ------------------------------------------------------------
-# ✅✅✅ PPT BUILDER WITH SAFE AGENDA FIX ✅✅✅
+# ✅ PPT BUILDER (TITLE + AGENDA + CONTENT + THANK YOU)
 # ------------------------------------------------------------
-def build_ppt(slides):
+def build_ppt(slides, agenda_titles, image_required):
     prs = Presentation()
 
+    # ✅ TITLE SLIDE
+    title_slide = prs.slides.add_slide(prs.slide_layouts[0])
+    title_slide.shapes.title.text = slides[0]["title"]
+    subtitle = title_slide.placeholders[1]
+    subtitle.text = datetime.now().strftime("%B %Y")
+
+    # ✅ AGENDA SLIDE
+    agenda_slide = prs.slides.add_slide(prs.slide_layouts[1])
+    agenda_slide.shapes.title.text = "Agenda"
+    title_tf = agenda_slide.shapes.title.text_frame
+    p = title_tf.paragraphs[0]
+    p.font.size = Pt(32)
+    p.font.bold = True
+    p.font.color.rgb = RGBColor(0, 102, 204)  # Corporate Blue
+    p.alignment = PP_ALIGN.LEFT
+    body = agenda_slide.placeholders[1]
+    tf = body.text_frame
+    tf.auto_size = MSO_AUTO_SIZE.NONE
+    tf.word_wrap = True
+    tf.clear()
+
+    for t in agenda_titles:
+        p = tf.add_paragraph()
+        p.text = t
+        p.font.size = Pt(20)
+        p.level = 0
+
+    body.top = agenda_slide.shapes.title.top + agenda_slide.shapes.title.height + Inches(0.3)
+
+    # ✅ Agenda Image (Allowed)
+    if image_required:
+        img = generate_visual_image("Agenda illustration")
+        if img:
+            body.width = prs.slide_width - Inches(4)
+            body.left = Inches(0.5)
+            agenda_slide.shapes.add_picture(
+                img,
+                prs.slide_width - Inches(3.5),
+                body.top,
+                width=Inches(3),
+            )
+    else:
+            body.left = Inches(0.5)
+            body.width = prs.slide_width - Inches(1)
+
+    # ✅ CONTENT SLIDES (UNCHANGED LOGIC)
     for sp in slides:
         slide = prs.slides.add_slide(prs.slide_layouts[1])
         slide.shapes.title.text = sp["title"]
-
+        title_tf = slide.shapes.title.text_frame
+        p = title_tf.paragraphs[0]
+        p.font.size = Pt(32)
+        p.font.bold = True
+        p.font.color.rgb = RGBColor(0, 102, 204)  # Corporate Blue
+        p.alignment = PP_ALIGN.LEFT
         body = slide.placeholders[1]
         tf = body.text_frame
-
         tf.auto_size = MSO_AUTO_SIZE.NONE
         tf.word_wrap = True
         tf.clear()
@@ -178,36 +216,31 @@ def build_ppt(slides):
 
         body.top = slide.shapes.title.top + slide.shapes.title.height + Inches(0.3)
 
-        # ✅ IMAGE SLIDES (UNCHANGED)
         if sp.get("image_path"):
-            try:
-                body.width = prs.slide_width - Inches(4)
-                body.left = Inches(0.5)
+            body.width = prs.slide_width - Inches(4)
+            body.left = Inches(0.5)
 
-                slide.shapes.add_picture(
-                    sp["image_path"],
-                    prs.slide_width - Inches(3.5),
-                    body.top,
-                    width=Inches(3),
-                )
-            except:
-                pass
-
-        # ✅✅✅ NON-IMAGE FIX (AGENDA SAFE DRAWING AREA)
+            slide.shapes.add_picture(
+                sp["image_path"],
+                prs.slide_width - Inches(3.5),
+                body.top,
+                width=Inches(3),
+            )
         else:
             body.left = Inches(0.5)
             body.width = prs.slide_width - Inches(1)
 
-    out_path = os.path.join(
-        tempfile.gettempdir(),
-        f"generated_{uuid.uuid4().hex[:8]}.pptx"
-    )
+    # ✅ THANK YOU SLIDE (NO IMAGE)
+    thank_slide = prs.slides.add_slide(prs.slide_layouts[5])
+    thank_slide.shapes.title.text = "Thank You"
+
+    out_path = os.path.join(tempfile.gettempdir(), f"generated_{uuid.uuid4().hex[:8]}.pptx")
     prs.save(out_path)
     return out_path
 
 
 # ------------------------------------------------------------
-# ✅ FINAL SAFE PIPELINE
+# ✅ FINAL PIPELINE
 # ------------------------------------------------------------
 def generate_presentation_auto(
     prompt,
@@ -218,37 +251,25 @@ def generate_presentation_auto(
 ):
     refs = semantic_search(prompt, top_k=5, tags=tag_filters) or []
 
-    if not refs:
-        return None, {"error": True, "message": "No matching content found in sample PPTs."}
-
     reference_text = [(r.get("text") or "")[:500] for r in refs]
 
     detected_slides = parse_user_intent(prompt)
     num_slides = requested_num_slides or detected_slides or 5
 
-    plan = call_llm_plan_auto(
-        prompt=prompt,
-        references_text=reference_text,
-        num_slides=num_slides,
-    )
-
-    if not plan:
-        return None, {
-            "error": True,
-            "message": "Not enough relevant content to generate this many slides. Try fewer slides or rephrase."
-        }
+    plan = call_llm_plan_auto(prompt, reference_text, num_slides)
 
     slides = []
     for sp in plan:
         img_path = generate_visual_image(sp["title"]) if image_required else None
-
         slides.append({
             "title": sp["title"],
             "bullets": sp["bullets"],
             "image_path": img_path,
         })
 
-    out_path = build_ppt(slides)
+    agenda_titles = [s["title"] for s in slides]
+
+    out_path = build_ppt(slides, agenda_titles, image_required)
 
     fname = f"generated_{uuid.uuid4().hex[:8]}.pptx"
     upload_ppt_to_blob(out_path, fname)
