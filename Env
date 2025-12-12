@@ -1,14 +1,26 @@
-# GPT Model (Azure Foundry)
-GPT_ENDPOINT=https://<your-ai-foundry-project>.models.ai.azure.com/
-GPT_API_KEY=<your-foundry-key>
-GPT_MODEL=gpt-4o-sm173
+# ===== Azure OpenAI Configuration =====
+OPENAI_API_TYPE=azure
+OPENAI_API_BASE=https://ppt-generator-2238880.openai.azure.com
+OPENAI_API_KEY=
+OPENAI_API_VERSION=2024-10-01-preview
 
-# Embedding Model (Azure OpenAI Resource)
-EMBEDDING_ENDPOINT=https://ppt-ai-gen-sm173.openai.azure.com/
-EMBEDDING_API_KEY=<your-azure-openai-resource-key>
+# Model Deployments (names from Azure OpenAI Portal)
+CHAT_MODEL=gpt-5-mini
 EMBEDDING_MODEL=text-embedding-3-large
+EMBEDDING_DIM=1536
 
-# DALL·E Model (Azure Foundry)
-DALLE_ENDPOINT=https://<your-ai-foundry-project>.models.ai.azure.com/
-DALLE_API_KEY=<your-foundry-key>
-DALLE_MODEL=dall-e-3
+# Image Generation config and deployment 
+IMAGE_API_BASE=https://image-generation-2238880.openai.azure.com
+IMAGE_API_KEY=
+IMAGE_MODEL=gpt-image-1-mini
+
+# ===== Azure Blob Storage =====
+AZURE_BLOB_CONN=DefaultEndpointsProtocol=https;AccountName=2238880sa;AccountKey=;EndpointSuffix=core.windows.net
+AZURE_BLOB_CONTAINER=ppt-dataset
+
+# ===== Output Container =====
+GENERATED_CONTAINER=generated-presentations
+LOG_LEVEL=INFO
+
+# ===== Chroma =====
+CHROMA_PERSIST_DIR=./chroma_db
